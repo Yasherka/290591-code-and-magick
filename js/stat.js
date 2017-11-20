@@ -33,13 +33,11 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Список результатов:', 223, 65);
 
   var max = -1;
-  var maxIndex = -1;
 
   for (var i = 0; i < times.length; i++) {
     var time = times[i];
     if (time > max) {
       max = Math.floor(time);
-      maxIndex = i;
     }
   }
 
@@ -51,10 +49,10 @@ window.renderStatistics = function (ctx, names, times) {
   var initialY = 245;
   var lineHeight = 20;
 
-  for (var i = 0; i < times.length; i++) {
+  for (i = 0; i < times.length; i++) {
     var cr = 'rgba(' + 0 + ',' + 0 + ',' + 255 + ',' + (Math.random() * (0.9 - 0.1) + 0.1) + ')';
 
-    if (names[i] != 'Вы') {
+    if (names[i] !== 'Вы') {
       ctx.fillStyle = cr;
     } else {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
