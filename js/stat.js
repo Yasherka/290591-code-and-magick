@@ -32,14 +32,7 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!', 235, 45);
   ctx.fillText('Список результатов:', 223, 65);
 
-  var max = -1;
-
-  for (var i = 0; i < times.length; i++) {
-    var time = times[i];
-    if (time > max) {
-      max = Math.floor(time);
-    }
-  }
+  var max = findMax(times);
 
   var histogramHeight = 150;
   var step = histogramHeight / (max - 0);
@@ -49,11 +42,9 @@ window.renderStatistics = function (ctx, names, times) {
   var initialY = 245;
   var lineHeight = 20;
 
-  for (i = 0; i < times.length; i++) {
-    var cr = 'rgba(' + 0 + ',' + 0 + ',' + 255 + ',' + (Math.random() * (0.9 - 0.1) + 0.1) + ')';
-
+  for (var i = 0; i < times.length; i++) {
     if (names[i] !== 'Вы') {
-      ctx.fillStyle = cr;
+      ctx.fillStyle = 'rgba(0, 0, 255, ' + (Math.random() * (0.9 - 0.1) + 0.1) + ')';
     } else {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     }
@@ -62,4 +53,16 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillText(names[i], initialX + indent * i, initialY + lineHeight);
     ctx.fillText(Math.floor(times[i]), initialX + indent * i, initialY - times[i] * step - 5);
   }
+};
+
+var findMax = function (arr) {
+  var max = -1;
+
+  for (var i = 0; i < arr.length; i++) {
+    var current = arr[i];
+    if (current > max) {
+      max = Math.floor(current);
+    }
+  }
+  return max;
 };
