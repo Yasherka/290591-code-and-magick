@@ -1,31 +1,24 @@
 'use strict';
 
 window.renderStatistics = function (ctx, names, times) {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-  ctx.beginPath();
-  ctx.moveTo(120, 290);
-  ctx.lineTo(540, 290);
-  ctx.lineTo(540, 145);
-  ctx.bezierCurveTo(540, 145, 550, 30, 440, 50);
-  ctx.bezierCurveTo(430, 50, 320, -20, 220, 50);
-  ctx.bezierCurveTo(220, 50, 110, 30, 120, 140);
-  ctx.lineTo(120, 290);
-  ctx.closePath();
-  ctx.stroke();
-  ctx.fill();
 
-  ctx.fillStyle = 'white';
-  ctx.beginPath();
-  ctx.moveTo(110, 280);
-  ctx.lineTo(530, 280);
-  ctx.lineTo(530, 135);
-  ctx.bezierCurveTo(530, 135, 540, 20, 420, 40);
-  ctx.bezierCurveTo(420, 40, 320, -30, 210, 40);
-  ctx.bezierCurveTo(210, 40, 100, 20, 110, 130);
-  ctx.lineTo(110, 280);
-  ctx.closePath();
-  ctx.stroke();
-  ctx.fill();
+  var drawPopup = function (color, x, y) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(110 + x, 280 + y);
+    ctx.lineTo(530 + x, 280 + y);
+    ctx.lineTo(530 + x, 135 + y);
+    ctx.bezierCurveTo(530 + x, 135 + y, 540 + x, 20 + y, 420 + x, 40 + y);
+    ctx.bezierCurveTo(420 + x, 40 + y, 320 + x, -30 + y, 210 + x, 40 + y);
+    ctx.bezierCurveTo(210 + x, 40 + y, 100 + x, 20 + y, 110 + x, 130 + y);
+    ctx.lineTo(110 + x, 280 + y);
+    ctx.closePath();
+    ctx.stroke();
+    ctx.fill();
+  };
+
+  drawPopup('rgba(0, 0, 0, 0.7)', 10, 10);
+  drawPopup('white', 0, 0);
 
   ctx.fillStyle = '#000';
   ctx.font = '16px PT Mono';
@@ -43,11 +36,9 @@ window.renderStatistics = function (ctx, names, times) {
   var lineHeight = 20;
 
   for (var i = 0; i < times.length; i++) {
-    if (names[i] !== 'Вы') {
-      ctx.fillStyle = 'rgba(0, 0, 255, ' + (Math.random() * (0.9 - 0.1) + 0.1) + ')';
-    } else {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-    }
+    ctx.fillStyle = (names[i] !== 'Вы') ?
+      'rgba(0, 0, 255, ' + (Math.random() * (0.9 - 0.1) + 0.1) + ')' :
+      'rgba(255, 0, 0, 1)';
 
     ctx.fillRect(initialX + indent * i, initialY, barWidth, -times[i] * step);
     ctx.fillText(names[i], initialX + indent * i, initialY + lineHeight);
