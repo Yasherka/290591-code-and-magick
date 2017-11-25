@@ -15,15 +15,15 @@ var similarListElement = document.querySelector('.setup-similar-list');
 
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
 
-var getRandom = function (arr) {
+var getRandomElementFromArray = function (arr) {
   return Math.floor(Math.random() * arr.length);
 };
 
 var createWizard = function (wizardName, wizardSurname, wizardCoat, wizardEyes) {
   var wizardId = {
-    name: wizardName[getRandom(wizardName)] + ' ' + wizardSurname[getRandom(wizardSurname)],
-    coatColor: wizardCoat[getRandom(wizardCoat)],
-    eyesColor: wizardEyes[getRandom(wizardEyes)]
+    name: wizardName[getRandomElementFromArray(wizardName)] + ' ' + wizardSurname[getRandomElementFromArray(wizardSurname)],
+    coatColor: wizardCoat[getRandomElementFromArray(wizardCoat)],
+    eyesColor: wizardEyes[getRandomElementFromArray(wizardEyes)]
   };
 
   return wizardId;
@@ -42,7 +42,7 @@ var renderWizard = function (wizard) {
 var pasteWizard = function (wizard) {
   var fragment = document.createDocumentFragment();
 
-  for (i = 0; i < wizard.length; i++) {
+  for (var i = 0; i < wizard.length; i++) {
     fragment.appendChild(renderWizard(wizard[i]));
   }
   similarListElement.appendChild(fragment);
