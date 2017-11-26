@@ -30,7 +30,7 @@ var createWizard = function (wizardName, wizardSurname, wizardCoat, wizardEyes) 
   return wizardId;
 };
 
-var renderWizard = function (wizard) {
+var createWizardElement = function (wizard) {
   var wizardElement = similarWizardTemplate.cloneNode(true);
 
   wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
@@ -40,11 +40,11 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
-var pasteWizard = function (wizard) {
+var renderSimilarWizards = function (wizards) {
   var fragment = document.createDocumentFragment();
 
-  for (var i = 0; i < wizard.length; i++) {
-    fragment.appendChild(renderWizard(wizard[i]));
+  for (var i = 0; i < wizards.length; i++) {
+    fragment.appendChild(createWizardElement(wizards[i]));
   }
   similarListElement.appendChild(fragment);
 };
@@ -54,6 +54,6 @@ for (var i = 0; i < 4; i++) {
   wizards[i] = createWizard(WIZARD_NAMES, WIZARD_SURNAMES, COAT_COLORS, EYES_COLORS);
 }
 
-pasteWizard(wizards);
+renderSimilarWizards(wizards);
 
 document.querySelector('.setup-similar').classList.remove('hidden');
