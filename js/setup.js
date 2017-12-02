@@ -68,6 +68,11 @@ renderSimilarWizards(wizards);
 
 document.querySelector('.setup-similar').classList.remove('hidden');
 
+document.querySelector('.setup-open-icon').setAttribute('tabindex', '0');
+setupClose.setAttribute('tabindex', '0');
+document.querySelector('.setup-wizard-form').setAttribute('action', 'https://js.dump.academy/code-and-magick');
+setupUserName.setAttribute('minlength', '2');
+
 var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE && setupUserName !== document.activeElement) {
     closePopup();
